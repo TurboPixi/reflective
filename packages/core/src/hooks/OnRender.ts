@@ -1,8 +1,8 @@
 export type OnRender = {
   /**
-   * Отрисовка происходит постоянно.
+   * Rendering is happening all the time.
    *
-   * @param interpolation Время между кадрами (в секундах).
+   * @param interpolation Time between frames (in seconds).
    */
   onRender(interpolation: number): void
 }

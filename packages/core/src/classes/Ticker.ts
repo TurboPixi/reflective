@@ -7,46 +7,46 @@ import { OnUpdate } from "../hooks/OnUpdate"
 import { GameObject } from "./GameObject"
 
 /**
- * Игровой цикл.
+ * Game loop.
  */
 export class Ticker extends GameObject {
   /**
-   * Длительность кадра в секундах.
+   * Frame duration in seconds.
    */
   readonly duration = milliseconds(1 / 60)
 
   /**
-   * Идентификатор кадра анимации. Нужен в "stop()".
+   * Animation frame identifier. Needed in "stop ()".
    */
   protected pendingAnimationFrame?: number
 
   /**
-   * Отпечаток времени предыдущего кадра.
+   * Time stamp of the previous frame.
    */
   protected previousTime = performance.now()
 
   /**
-   * Остановлен ли цикл.
+   * Whether the cycle has stopped.
    */
   protected stopped = true
 
   /**
-   * Запущен ли цикл.
+   * Whether the cycle has started.
    */
   protected running = false
 
   /**
-   * Отпечаток времени следующего кадра.
+   * Time stamp of next frame.
    */
   protected nextTime = performance.now()
 
   /**
-   * Номер кадра.
+   * Frame number.
    */
   protected frame = 0
 
   /**
-   * Запускает цикл.
+   * Starts a loop.
    */
   start = () => {
     this.propagate<OnRequestAnimationFrame>(
@@ -86,7 +86,7 @@ export class Ticker extends GameObject {
   }
 
   /**
-   * Останавливает цикл.
+   * Stops the loop.
    */
   stop() {
     this.running = false
@@ -99,8 +99,8 @@ export class Ticker extends GameObject {
   }
 
   /**
-   * Рассчитывает значение интерполяции.
-   * Отношение прошедшего времени и общего времени между кадрами.
+   * Calculates the interpolation value.
+   * The ratio of elapsed time and total time between frames.
    */
   protected get interpolation() {
     const interpolation = clamp(this.elapsed / this.difference, 0, 1)
@@ -109,14 +109,14 @@ export class Ticker extends GameObject {
   }
 
   /**
-   * Рассчитывает время между предыдущим и следующим кадром.
+   * Calculates the time between the previous and next frame.
    */
   protected get difference() {
     return this.nextTime - this.previousTime
   }
 
   /**
-   * Рассчитывает время между сейчас и следующим кадром.
+   * Calculates the time between now and the next frame.
    */
   protected get elapsed() {
     return performance.now() - this.previousTime

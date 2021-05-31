@@ -1,8 +1,8 @@
 export type OnUpdate = {
   /**
-   * Обновления происходят не чаще N раз в секунду.
+   * Updates occur no more than N times per second.
    *
-   * @param elapsedTime Время между кадрами (в секундах).
+   * @param elapsedTime Time between frames (in seconds).
    */
   onUpdate(elapsedTime: number): void
 }

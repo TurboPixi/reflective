@@ -1,14 +1,14 @@
 /**
- * Расширенный массив с дополнительными методами.
+ * Extended array with additional methods.
  */
 export class ArrayList<T> extends Array<T> {
   /**
-   * Удаляет первый элемент совпадающий с "searchElement" из массива.
+   * Removes the first element matching "searchElement" from the array.
    *
-   * @param searchElement Элемент, который надо удалить.
-   * @param fromIndex С какого индекса надо начать поиск. К индексу применен оператор "~".
+   * @param searchElement The element to be removed.
+   * @param fromIndex From which index to start the search. The "~" operator has been applied to the index.
    *
-   * @returns Возвращает индекс удаленного элемента. К индексу применен оператор "~".
+   * @returns Returns the index of the removed item. The "~" operator has been applied to the index.
    */
   delete(searchElement: T, fromIndex = -1) {
     const index = this.indexOf(searchElement, ~fromIndex)

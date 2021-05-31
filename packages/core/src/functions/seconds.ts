@@ -1,8 +1,8 @@
 /**
- * Конвертирует миллисекунды в секунды.
+ * Converts milliseconds to seconds.
  *
- * @param value Миллисекунды.
+ * @param value Milliseconds.
  *
- * @returns Секунды.
+ * @returns seconds.
  */
 export const seconds = (value: number) => value / 1000

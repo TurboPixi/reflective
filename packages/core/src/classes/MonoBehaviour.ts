@@ -11,7 +11,7 @@ export type Query<K extends string | number | symbol> = {
 }
 export type GetComponentOptions = {
   /**
-   * По-умолчанию - `true`.
+   * Default - `true`.
    */
   required?: boolean
 }

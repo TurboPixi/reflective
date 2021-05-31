@@ -6,7 +6,6 @@ export type Interface<Function = (...args: never[]) => void> = Record<
   string | number | symbol,
   Function
 >
-
 export class EventTarget extends Node {
   propagate<T extends Interface>(
     key: keyof T,

@@ -1,76 +1,75 @@
 import { ArrayList } from "./ArrayList"
 
 export type Constructor<T> = new (...args: never[]) => T
-
 /**
- * Базовый класс узла.
- * Имеет методы для перемещения по дереву узлов.
+ * Base node class.
+ * Has methods for traversing the tree of nodes.
  */
 export class Node {
   /**
-   * Ссылка на предыдущий узел (в родительском массиве "children").
+   * Reference to the previous node (in the parent array "children").
    */
   protected previous?: Node
 
   /**
-   * Массив потомков.
+   * Array of descendants.
    */
   readonly children = new ArrayList<Node>()
 
   /**
-   * Ссылка на родительский узел.
+   * Link to the parent node.
    */
   parent?: Node
 
   /**
-   * Ссылка на следующий узел (в родительском массиве "children").
+   * Link to the next node (in the parent array "children").
    */
   protected next?: Node
 
   /**
-   * Добавляет потомка к этому узлу, а также обновляет ссылки
-   * на следующий, предыдущий и родительский узлы.
+   * Adds a child to this node and also updates links
+   * to the next, previous and parent nodes.
    *
-   * @param child Потомок.
+   * @param child Descendant.
    */
   attach(child: Node) {
-    // Последний добавленный потомок.
+    // The last child added.
     const previous = this.children[this.children.length - 1]
 
-    // Если он существует ("Attach()" был вызван хотя бы один раз).
+    // If it exists ("Attach ()" has been called at least once).
     if (previous) {
-      // Последний добавленный потомок ссылается на новый узел "child".
+      // The last child added refers to the new "child" node.
       previous.next = child
-      // "child" ссылается на последнего добавленного потомка.
+      // "child" refers to the last added child.
       child.previous = previous
     }
 
-    // "child" ссылается на этот узел (родительский).
+    // "child" refers to this node (parent).
     child.parent = this
 
-    // Наконец-то, добавляем его в массив потомков.
+    // Finally, we add it to the descendant array.
     this.children.push(child)
   }
 
   /**
-   * Удаляет потомка из этого узла, а также обновляет ссылки
-   * на следующий, предыдущий и родительский узлы.
+   * Removes a child from this node and also updates links
+   * to the next, previous and parent nodes.
    *
-   * @param child Потомок.
+   * @param child Descendant.
    */
   detach(child: Node) {
     if (child.previous) {
-      // Было:
+      // It was:
       // A -> "child" -> B
-      // Стало:
+      // Has become:
       // A -> B
       child.previous.next = child.next
     }
 
     if (child.next) {
-      // Было:
+      // It was:
       // A <- "child" <- B
-      // Стало:
+      // Has become:
       // A <- B
       child.next.previous = child.previous
     }
@@ -84,11 +83,11 @@ export class Node {
   }
 
   /**
-   * Итератор по дочерним узлам.
+   * An iterator over child nodes.
    *
-   * @param predicate Критерий поиска, если не передан, будут возвращены все узлы.
+   * @param predicate Search criterion, if not passed, will return all nodes.
    *
-   * @yields Узел, удовлетворяющий критерию поиска.
+   * @yields Knot, satisfying the search criteria.
    */
   get(): Generator<Node, undefined, undefined>
 
@@ -105,12 +104,12 @@ export class Node {
   }
 
   /**
-   * Итератор по дочерним узлам и дочерним узлам дочерних узлов (рекурсивный).
-   * Используется Breadth-First алгоритм (поиск в ширину).
+   * Iterator over child nodes and child nodes of child nodes (recursive).
+   * The Breadth-First algorithm (breadth first search) is used.
    *
-   * @param predicate Критерий поиска, если не передан, будут возвращены все узлы.
+   * @param predicate Search criterion, if not passed, will return all nodes.
    *
-   * @yields Узел, удовлетворяющий критерию поиска.
+   * @yields Knot, satisfying the search criteria.
    */
   getInChildren(): Generator<Node, undefined, undefined>
 
@@ -131,11 +130,11 @@ export class Node {
   }
 
   /**
-   * Итератор по родительским узлам (включая узел, на котором вызвана эта функция).
+   * An iterator over parent nodes (including the node on which this function is called).
    *
-   * @param predicate Критерий поиска, если не передан, будут возвращены все узлы.
+   * @param predicate Search criterion, if not passed, will return all nodes.
    *
-   * @yields Узел, удовлетворяющий критерию поиска.
+   * @yields Knot, satisfying the search criteria.
    */
   getInParent(): Generator<Node, undefined, undefined>
 

@@ -102,7 +102,7 @@
     "noUnusedLocals": true,
 
     /* Report errors on unused parameters. */
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
 
     /* Report error when not all code paths in function return a value. */
     // "noImplicitReturns": true,

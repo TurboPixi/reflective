@@ -1,11 +1,11 @@
 /**
- * Ограничивает число между минимальным и максимальным.
+ * Limits the number between minimum and maximum.
  *
- * @param value Число, которое надо ограничить.
- * @param lower Минимальное число.
- * @param upper Максимальное число.
+ * @param value The number to limit.
+ * @param lower The minimum number.
+ * @param upper Maximum number.
  *
- * @returns Ограниченное число.
+ * @returns Limited number
  */
 export const clamp = (value: number, lower: number, upper: number) =>
   Math.max(Math.min(value, upper), lower)
